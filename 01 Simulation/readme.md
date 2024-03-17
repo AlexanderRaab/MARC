@@ -12,7 +12,8 @@ The following files are currently included:
 *   A SIMULINK model for simulating the Differential Drive kinematics including voltage controlled motors and encoder based odometry
 
 ## Example images
-![Simulink model](04%20Documentation\img\simulink_model_diff_drive.png)
+<img src="../04%20Documentation/img/simulink_model_diff_drive.PNG" alt="Simulink model" width="800"/>
+
 Motor identification ARX model           |  Motor identification PT1 model 
 :-------------------------:|:-------------------------:
-![MARC](04%20Documentation\img\motor_ident_ARX.jpg)  |  ![MARC](04%20Documentation\img\motor_ident_pt1.jpg)
+<img src="../04%20Documentation/img/motor_ident_arx.jpg" alt="Results ARX identification" width="400"/>  |  <img src="../04%20Documentation/img/motor_ident_pt1.jpg" alt="Results PT1 identification" width="400"/>
