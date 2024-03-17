@@ -58,11 +58,6 @@ hold on;
 plot(data.t(range)-data.t(range(1)), data.wl(range)/V);
 plot(data.t(range)-data.t(range(1)), data.wr(range)/V);
 step(TF_MOT/2)
-grid on;
-legend("\omega_l", "\omega_r", "result");
-xlabel("t in s")
-ylabel("\omega in rad/s")
-title("Step response PT1 identification")
 
 %% ARX Identification
 data = readtable(data_path + file_names(2, 4));
@@ -78,11 +73,10 @@ V = 6.21/2;
 range = 473:605;
 figure;
 hold on;
-plot(data.t(range)-data.t(range(1)), data.wl(range)/V, color="m");
+plot(data.t(range)-data.t(range(1)), data.wl(range)/V, color="");
 plot(data.t(range)-data.t(range(1)), data.wr(range)/V);
 step(TF_MOT);
-grid on;
-legend("\omega_l", "\omega_r", "result");
+legend("\omega_l", "\omega_r", "ARX");
 xlabel("t in s")
 ylabel("\omega in rad/s")
-title("Step response ARX identification")
+title("ARX identification")

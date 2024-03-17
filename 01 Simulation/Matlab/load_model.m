@@ -9,7 +9,7 @@ wheel_radius = 0.01625;
 max_turning_radius = 100;
 
 % Motor data
-motor_tf = load('..\data\platform\TF_motor.mat').TF_MOT;
+motor_tf = load('..\data\platform_ident\TF_motor.mat').TF_MOT;
 motor_vel_max = 47.5;
 motor_Ts = 50e-3;
 motor_vcc = 5.93;

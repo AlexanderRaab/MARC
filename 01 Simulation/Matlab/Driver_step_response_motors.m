@@ -2,10 +2,10 @@ close all;
 clear;
 
 %% Load measurement data
-step_50 = readtable('..\Data\Platform\motor_step_data_50');
-step_30 = readtable('..\Data\Platform\motor_step_data_30');
-step_25 = readtable('..\Data\Platform\motor_step_data_25');
-step_10 = readtable('..\Data\Platform\motor_step_data_10');
+step_50 = readtable('..\data\platform_ident\motor_step_data_50');
+step_30 = readtable('..\data\platform_ident\motor_step_data_30');
+step_25 = readtable('..\data\platform_ident\motor_step_data_25');
+step_10 = readtable('..\data\platform_ident\motor_step_data_10');
 
 % Normalize data
 step_50  = step_50(step_50.u > 0,:);

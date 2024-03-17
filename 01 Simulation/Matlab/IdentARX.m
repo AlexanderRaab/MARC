@@ -1,4 +1,4 @@
-function [A, B] = IdentARX(u, y, na, nb, nk)
+function [A, B] = IdentARX(u, y, na, nb, nk, Ta)
     % Reshape data to column vectors
     y = reshape(y,[length(y),1]);
     u = reshape(u,[length(y),1]);
