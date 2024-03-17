@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+   
+   <!-- Camsense X1 lidar -->
+    <xacro:macro name="CamsenseX1" params="*parent *origin">  
+
+        <link name="lidar_sensor_link">
+            <visual>
+                <origin xyz=" 0 0 0" rpy="0 0 0" />
+                <geometry>
+                     <cylinder length="0.0195" radius="0.0325" />
+                </geometry>
+                <material name="blue" />
+            </visual>
+        </link>
+
+        <joint name="lidar_sensor_joint" type="fixed">
+            <xacro:insert_block name="origin"/>
+            <xacro:insert_block name="parent"/>
+            <child link="lidar_sensor_link" />
+        </joint>
+	
+        <!-- Simulation plugin-->
+         <gazebo reference="lidar_sensor_link">
+         
+        </gazebo>   
+
+    </xacro:macro>
+</robot>

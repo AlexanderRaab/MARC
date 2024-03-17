@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<robot name="robot" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find marc_description)/src/urdf/library.urdf.xacro" />
+ 
+  <xacro:property name="raspberry_layer_offset" value="0.033" /> 
+  <xacro:property name="lidar_layer_offset" value="0.031" /> 
+
+  <!-- Base platform and layers-->
+  <xacro:diff_drive_base z_offset = "0.008"/>
+  <xacro:raspberry_layer z_offset = "0.041"> 
+    <parent link="base_link"/> 
+  </xacro:raspberry_layer>
+  <xacro:lidar_layer z_offset = "0.072"> 
+    <parent link="base_link"/> 
+  </xacro:lidar_layer>
+
+</robot>

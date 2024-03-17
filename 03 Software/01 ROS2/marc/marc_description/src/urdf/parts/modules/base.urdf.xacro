@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">     
+    <!-- Base macro -->
+    <xacro:macro name="base" params="*visual *collision *inertial">
+    
+        <xacro:layer name = "base">
+            <xacro:insert_block name="visual"/>
+            <xacro:insert_block name="collision"/>
+            <xacro:insert_block name="inertial"/>
+        </xacro:layer>
+
+        <link name="base_footprint">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.001 0.001 0.001" />
+                </geometry>
+                <material name="green" />
+            </visual>
+        </link>
+
+        <joint name="base_footprint_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <parent link="base_link" />
+            <child link="base_footprint" />
+        </joint>
+    </xacro:macro>
+</robot>

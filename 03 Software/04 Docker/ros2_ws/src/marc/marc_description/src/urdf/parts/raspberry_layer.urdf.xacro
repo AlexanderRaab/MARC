@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">     
+    <!-- DiffDrive Base macro -->
+    <xacro:macro name="raspberry_layer" params="*parent z_offset:=0.0 name:=raspberry_layer">
+        <xacro:property name="h" value="0.031" /> 
+        <xacro:property name="r" value="0.0725" /> 
+        <!-- Simulation Plugin-->
+        <gazebo>
+
+        </gazebo>  
+        
+        <!-- Layer macro -->
+        <xacro:layer name = "${name}">
+            <visual>
+                <!-- <origin xyz=" 0 0 ${h/2} " rpy="0 0 0" /> -->
+                <origin xyz=" 0 0 0" rpy="0 0 0" /> 
+                <geometry>
+                    <mesh filename="file://$(find marc_description)/src/meshes/layers/RaspberryLayer.stl"/>
+                    <!-- <cylinder length="${h}" radius="${r}" /> -->
+                </geometry>
+                <material name="light_grey" />
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 ${h/2}" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="${h}" radius="${r}" />
+                </geometry>
+            </collision>
+
+            <inertial>
+                <!-- TODO Mass & Inertia -->
+                <mass value="0.2" />
+                <origin xyz="0 0 0.0" />
+                <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.05" />
+            </inertial>
+        </xacro:layer>
+
+        <joint name="${name}_joint" type="fixed">
+            <origin xyz="0 0 ${z_offset}" rpy="0 0 0" />
+            <xacro:insert_block name="parent"/>
+            <child link="${name}_link" />
+        </joint>
+
+        <!-- Front camera -->
+        <xacro:RP_5MP_cam name="front">
+            <origin xyz="0.056 0 0.016" rpy="0 0 0" />
+            <parent link="${name}_link"/> 
+        </xacro:RP_5MP_cam>
+
+    </xacro:macro>
+</robot>

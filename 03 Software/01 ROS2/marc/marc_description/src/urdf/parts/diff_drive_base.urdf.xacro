@@ -1,0 +1,128 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">     
+    <!-- DiffDrive Base macro -->
+    <xacro:macro name="diff_drive_base" params="wheel_separation:=0.115 wheel_radius:=0.016 wheel_width:=0.0065 ball_separation:=0.114 ball_radius:=0.0095 z_offset:=0.008">
+        
+        <xacro:property name="h" value="0.033" />
+        <xacro:property name="r" value="0.0725" /> 
+
+        <!-- Simulation Plugin-->
+        <gazebo>
+           <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+     	       
+            <!-- Settings -->
+               <always_on>true</always_on>        
+               <update_rate>50</update_rate>
+               <left_joint>left_wheel_joint</left_joint>
+               <right_joint>right_wheel_joint</right_joint>
+               <wheel_separation>${wheel_separation}</wheel_separation>
+               <wheel_diameter>${wheel_radius * 2}</wheel_diameter>
+               <!--<wheel_torque>${wheel_torque}</wheel_torque>-->
+               <!--wheel_acceleration>${wheel_accel}</wheel_acceleration-->
+               <command_topic>cmd_vel</command_topic>
+              
+               <!-- Output -->
+               <publish_odom>true</publish_odom>
+               <publish_odom_tf>false</publish_odom_tf>
+               <publish_wheel_tf>true</publish_wheel_tf>
+
+               <odometry_frame>odom</odometry_frame>
+               <robot_base_frame>base_link</robot_base_frame>
+            </plugin>  
+
+            <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+                <joint_name>right_wheel_joint</joint_name>
+                <joint_name>left_wheel_joint</joint_name>
+                <update_rate>20</update_rate>
+                <always_on>true</always_on>
+            </plugin>
+        </gazebo>  
+        
+        <!-- Base layer macro -->
+        <xacro:base>
+            <visual>
+                <!-- <origin xyz=" 0 0 ${z_offset + h/2} " rpy="0 0 0" /> -->
+                <origin xyz=" 0 0 ${z_offset}" rpy="0 0 0" /> 
+                <geometry>
+                    <mesh filename="file://$(find marc_description)/src/meshes/layers/DiffDriveBase.stl"/>
+                    <!-- <cylinder length="${h}" radius="${r}" /> -->
+                </geometry>
+                <material name="light_grey" />
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 ${z_offset + h/2}" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="${h}" radius="${r}" />
+                </geometry>
+            </collision>
+
+            <inertial>
+                <!-- TODO Mass & Inertia -->
+                <mass value="1" />
+                <origin xyz="0 0 0.0" />
+                <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.5" />
+            </inertial>
+        </xacro:base>
+
+    
+        <!-- Wheels and ball castors -->
+        <xacro:wheel prefix="left" radius="${wheel_radius}" width="${wheel_width}" parent_link="base_link">
+        <origin xyz="0 ${wheel_separation/2} ${wheel_radius}" rpy="0 0 0"/>
+        </xacro:wheel>
+        <xacro:wheel prefix="right" radius="${wheel_radius}" width="${wheel_width}" parent_link="base_link">
+            <origin xyz="0 ${-wheel_separation/2} ${wheel_radius}" rpy="0 0 0"/>
+        </xacro:wheel>
+
+        <xacro:castor prefix="front" radius="${ball_radius}" parent_link="base_link">
+            <origin xyz="${ball_separation / 2} 0 ${ball_radius}" rpy="0 0 0"/>
+        </xacro:castor>
+        <xacro:castor prefix="back" radius="${ball_radius}" parent_link="base_link">
+            <origin xyz="${-ball_separation / 2} 0 ${ball_radius}" rpy="0 0 0"/>
+        </xacro:castor>
+
+        <!-- Ultrasonic sensors -->
+        <xacro:property name="a" value="0.030175" />
+        <xacro:property name="b" value="0.072848" /> 
+        <xacro:property name="c" value="0.0299" /> 
+
+        <xacro:HC-SR04 name="1" parent_link="base_link">
+            <origin xyz="${a} ${b} ${c}" rpy="0 0 ${3*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+        <xacro:HC-SR04 name="2" parent_link="base_link">
+            <origin xyz="${b} ${a} ${c}" rpy="0 0 ${1*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+        <xacro:HC-SR04 name="3" parent_link="base_link">
+            <origin xyz="${b} ${-a} ${c}" rpy="0 0 ${-1*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+        <xacro:HC-SR04 name="4" parent_link="base_link">
+            <origin xyz="${a} ${-b} ${c}" rpy="0 0 ${-3*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+        <xacro:HC-SR04 name="5" parent_link="base_link">
+            <origin xyz="${-a} ${-b} ${c}" rpy="0 0 ${-5*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+        <xacro:HC-SR04 name="6" parent_link="base_link">
+            <origin xyz="${-b} ${-a} ${c}" rpy="0 0 ${-7*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+        <xacro:HC-SR04 name="7" parent_link="base_link">
+            <origin xyz="${-b} ${a} ${c}" rpy="0 0 ${7*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+        <xacro:HC-SR04 name="8" parent_link="base_link">
+            <origin xyz="${-a} ${b} ${c}" rpy="0 0 ${5*22.5*PI/180}"/>
+        </xacro:HC-SR04>
+        
+
+        <!-- IMU -->
+        <xacro:LSM6DS33 name="main">
+            <origin xyz="0 0 0.011" rpy="0 0 0" />
+            <parent link="base_link"/> 
+        </xacro:LSM6DS33>
+    </xacro:macro>
+</robot>

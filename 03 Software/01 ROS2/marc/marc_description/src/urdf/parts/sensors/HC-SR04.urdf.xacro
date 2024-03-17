@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+   
+   <!-- HC-SR04 Ultrasonic range sensor -->
+    <xacro:macro name="HC-SR04" params="*origin name parent_link">        
+        <link name="ultrasonic_sensor_${name}_link">
+        </link>
+        
+        <joint name="ultrasonic_sensor_${name}_joint" type="fixed">
+            <xacro:insert_block name="origin" />
+            <parent link="${parent_link}" />
+            <child link="ultrasonic_sensor_${name}_link" />
+        </joint>
+	
+	
+        
+        <gazebo reference="ultrasonic_sensor_${name}_link">
+            <sensor name="ultrasonic_${name}" type="ray">
+                <always_on>true</always_on>
+                <visualize>false</visualize>
+                <update_rate>10</update_rate>
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <samples>5</samples>
+                            <resolution>1.000000</resolution>
+                            <min_angle>-0.131</min_angle>
+                            <max_angle>0.131</max_angle>
+                        </horizontal>
+                        <vertical>
+                            <samples>5</samples>
+                            <resolution>1.000000</resolution>
+                            <min_angle>-0.01</min_angle>
+                            <max_angle>0.01</max_angle>
+                        </vertical>
+                    </scan>
+                    <range>
+                        <min>0.02</min>
+                        <max>4</max>
+                        <resolution>0.01</resolution>
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>
+                </ray>
+                <plugin name="ultrasonic_sensor_${name}" filename="libgazebo_ros_ray_sensor.so">
+                    <ros>
+                        <namespace>ultrasonic</namespace>                    
+                        <remapping>~/out:=ultrasonic/range</remapping>
+                        <qos>
+                            <topic name="ultrasonic/range">
+                                <publisher>
+                                    <reliability>reliable</reliability>
+                                </publisher>
+                            </topic>
+                        </qos>
+                    </ros>
+                    <output_type>sensor_msgs/Range</output_type>
+                    <radiation_type>ultrasound</radiation_type>
+                    <frame_name>ultrasonic_sensor_${name}_link</frame_name>
+                </plugin>
+            </sensor>
+        </gazebo>   
+    </xacro:macro>
+</robot>

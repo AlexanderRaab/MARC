@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+   
+   <!-- LSM6DS33 IMU -->
+    <xacro:macro name="LSM6DS33" params="*parent *origin name">  
+
+        <link name="${name}_IMU_link">
+            <visual>
+                <origin xyz=" 0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.02 0.015 0.001" />
+                </geometry>
+                <material name="blue" />
+            </visual>
+        </link>
+
+        <joint name="${name}_IMU_joint" type="fixed">
+            <xacro:insert_block name="origin"/>
+            <xacro:insert_block name="parent"/>
+            <child link="${name}_IMU_link" />
+        </joint>
+	
+        <!-- Simulation plugin-->
+        <gazebo reference="${name}_IMU_link">
+         
+        </gazebo>   
+
+    </xacro:macro>
+</robot>

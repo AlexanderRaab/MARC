@@ -1,0 +1,8 @@
+Static IP in /etc/netplan
+
+/boot/firmware/config.txt
+
+hdmi_force_hotplug=true
+camera_x=1?
+gpu_mem=320
+camera_autodetect=false
