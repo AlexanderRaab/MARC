@@ -2,6 +2,7 @@ Notes.txt
 00 Misc
 00 Misc\*
 03 Software\RPi Settings.txt
+03 Software\04 Docker\ros2_ws\*
 
 *.mat
 *.log
