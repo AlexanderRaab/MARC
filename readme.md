@@ -1,6 +1,8 @@
 # Project MARC
 This repository containes the documentation of the Modular Autonomous Research Companion (MARC).
 
+![MARC](04 Documentation\img\MARC_img_front.jpeg)
+
 ## Purpose and goal
 MARC is a small mobile robot built for at-home testing and experimentation with autonomous robots and all related tasks.
 The initial project was started in 2023 with the goal of having a compact and cost-efficient robot, which can be easily adapted for a multitude of different tasks. For this MARC is setup in different layered modules. Each having a clear functionality as well as providing a defined interface for controlling and sensory feedback.
@@ -18,7 +20,7 @@ At this stage, prototypes for the 4 most crucial modules of MARC are completed.
 | LiDAR Layer              | Main 2D LiDAR for localization                    | UART                   |
 
 #### Differential Drive Layer
-This layer is a implementation of a Differential Drive robot. Computations are done on a [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/). 2 DC-motors together with PWM-based motor drivers are used for locomotion. 
+This layer is a implementation of a Differential Drive robot. Computations are done on a [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/) mounted on a custom designed PCB. 2 DC motors together with PWM-based motor drivers are used for locomotion. 
 The odometry data is currently only computed from wheel encoder signals. Additionally an on-board IMU provides linear acceleration and angular velocity feedback. 
 Basic obstacle avoidance can be implemented using 8 ultrasonic distance sensors placed on the circumference of the chassis.
 
@@ -38,3 +40,21 @@ The current version of MARC is based on [ROS2 Humble]( https://docs.ros.org/en/h
 Due to the current focus on hardware prototypes and low-level locomotion control, the ROS2 setup is still under development.
 
 ## Roadmap and planned features
+
+Current development
+
+*   Finishing the intial setup of the ROS2 project for basic SLAM tasks
+*   Stabilizing the ROS2 network to improve performance
+    *   Revisit the implementation of the camera driver
+    *   Improve performance of the custom LiDAR driver
+  
+Planned features
+*   Differential Drive Layer
+    *   Implement on-board odometry fusion with an EKF
+    *   Change control setup from decoupled PIDs to a model based controller
+*   Motion planning and control
+    * Implement a trajectory tracking control based on input-output linearization
+*   Object detection and classification
+    *    Utilize a [YOLO](https://github.com/ultralytics/ultralytics) model on-board for basic detection tasks  
+*   Environment interaction
+    *   Design and implement a prototype layer for interacting with the environment (e.g. a 3-DOF robotic arm, gripper or fork-lift module)
