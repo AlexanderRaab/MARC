@@ -1,8 +1,7 @@
 # Project MARC
 This repository containes the documentation of the Modular Autonomous Research Companion (MARC).
 
-![MARC](04 Documentation\img\MARC_img_front.jpeg)
-
+<img src="04%20Documentation/img/MARC_rendering_3D.png" alt="MARC" width="600"/>
 ## Purpose and goal
 MARC is a small mobile robot built for at-home testing and experimentation with autonomous robots and all related tasks.
 The initial project was started in 2023 with the goal of having a compact and cost-efficient robot, which can be easily adapted for a multitude of different tasks. For this MARC is setup in different layered modules. Each having a clear functionality as well as providing a defined interface for controlling and sensory feedback.
@@ -11,7 +10,9 @@ The initial project was started in 2023 with the goal of having a compact and co
 Up until now, the development mainly focused on setting up the first prototype. Thus, most time was spent on designing a robust implementation of the drive layer, responsible for moving the robot and providing basic sensory feedback for autonomous navigation.
 
 ### Hardware
+<img src="04%20Documentation/img/MARC_img_front.jpeg" alt="MARC" width="600"/>
 At this stage, prototypes for the 4 most crucial modules of MARC are completed.
+
 | Module name              | Functionality                                     | Interface              |
 |--------------------------|---------------------------------------------------|------------------------|
 | Differential Drive Layer | Locomotion, odometry and basic obstacle detection | micro-ROS via UART     |
