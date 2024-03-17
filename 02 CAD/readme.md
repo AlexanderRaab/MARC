@@ -1,5 +1,5 @@
 # CAD
-This folder contains all CAD files and assemblies for MARC. Version 1.0 is still in devlopment.
+This folder contains all CAD files and assemblies for MARC. Version 1.0 is still in development.
 
 <img src="../04%20Documentation/img/MARC_rendering_3D.png" alt="MARC V1.0" width="600"/>
 

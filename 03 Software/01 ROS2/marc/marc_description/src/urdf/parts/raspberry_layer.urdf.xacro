@@ -30,9 +30,9 @@
 
             <inertial>
                 <!-- TODO Mass & Inertia -->
-                <mass value="1" />
+                <mass value="0.2" />
                 <origin xyz="0 0 0.0" />
-                <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.5" />
+                <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.05" />
             </inertial>
         </xacro:layer>
 

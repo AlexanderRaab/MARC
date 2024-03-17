@@ -6,8 +6,8 @@
             <inertial>
                 <!-- TODO Mass & Inertia -->
                 <origin xyz="0 0 0" />
-                <mass value="0.01" />
-                <inertia ixx="0.001" ixy="0.001" ixz="0.001" iyy="0.001" iyz="0.001" izz="0.001" />
+                <mass value="0.1" />
+                <inertia ixx="0.01" ixy="0.001" ixz="0.001" iyy="0.01" iyz="0.001" izz="0.01" />
             </inertial>
 
             <visual>
@@ -30,11 +30,15 @@
     	    <xacro:insert_block name="origin" />
             <parent link="${parent_link}" />
             <child link="${prefix}_castor_link" />
+            <dynamics damping="0"/>
         </joint>
 	
         <gazebo reference="${prefix}_castor_link">
-           <mu1>0.01</mu1>
-           <mu2>0.01</mu2>
+            <mu1>0.001</mu1>
+            <mu2>0.001</mu2>
+            <!--<kp>100000.0</kp>-->
+            <!--<kd>1000.0</kd>-->
+            <!--<minDepth>0.001</minDepth>-->
         </gazebo>
     </xacro:macro>
 </robot>

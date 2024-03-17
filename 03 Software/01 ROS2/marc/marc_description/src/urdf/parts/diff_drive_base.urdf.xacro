@@ -12,13 +12,13 @@
      	       
             <!-- Settings -->
                <always_on>true</always_on>        
-               <update_rate>50</update_rate>
+               <update_rate>40</update_rate>
                <left_joint>left_wheel_joint</left_joint>
                <right_joint>right_wheel_joint</right_joint>
                <wheel_separation>${wheel_separation}</wheel_separation>
                <wheel_diameter>${wheel_radius * 2}</wheel_diameter>
-               <!--<wheel_torque>${wheel_torque}</wheel_torque>-->
-               <!--wheel_acceleration>${wheel_accel}</wheel_acceleration-->
+               <!--<wheel_torque>0.17</wheel_torque>-->
+               <!--<wheel_acceleration>5</wheel_acceleration>-->
                <command_topic>cmd_vel</command_topic>
               
                <!-- Output -->
@@ -59,9 +59,9 @@
 
             <inertial>
                 <!-- TODO Mass & Inertia -->
-                <mass value="1" />
-                <origin xyz="0 0 0.0" />
-                <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.5" />
+                <mass value=".25" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="5." ixy="0.01" ixz="0.01" iyy="5." iyz="0.01" izz="5." />
             </inertial>
         </xacro:base>
 
@@ -74,10 +74,10 @@
             <origin xyz="0 ${-wheel_separation/2} ${wheel_radius}" rpy="0 0 0"/>
         </xacro:wheel>
 
-        <xacro:castor prefix="front" radius="${ball_radius}" parent_link="base_link">
+        <xacro:castor prefix="front" radius="${ball_radius-0.001}" parent_link="base_link">
             <origin xyz="${ball_separation / 2} 0 ${ball_radius}" rpy="0 0 0"/>
         </xacro:castor>
-        <xacro:castor prefix="back" radius="${ball_radius}" parent_link="base_link">
+        <xacro:castor prefix="back" radius="${ball_radius-0.001}" parent_link="base_link">
             <origin xyz="${-ball_separation / 2} 0 ${ball_radius}" rpy="0 0 0"/>
         </xacro:castor>
 

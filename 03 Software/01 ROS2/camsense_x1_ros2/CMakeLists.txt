@@ -1,16 +1,26 @@
 cmake_minimum_required(VERSION 3.8)
-project(marc_bringup)
+project(camsense_x1_ros2)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-find_package(ament_cmake REQUIRED)
 
-install(
-  DIRECTORY src launch config
-  DESTINATION share/${PROJECT_NAME}
-)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+include_directories(include)
+
+add_executable(driver src/node.cpp)
+ament_target_dependencies(driver rclcpp sensor_msgs)
+
+install(TARGETS
+  driver
+  DESTINATION lib/${PROJECT_NAME})
+  
+ install(DIRECTORY
+  launch config
+  DESTINATION share/${PROJECT_NAME}/)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
