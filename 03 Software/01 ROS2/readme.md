@@ -1,6 +1,6 @@
 # ROS2 
 This folder contains all custom ROS2 packages. 
-*Note: MARC is currently developed for ROS2 Humble*
+**Note: MARC is currently developed for ROS2 Humble**
 
 ## Usage
 For detailed descriptions of how to run the ROS2 project, check the [marc_bringup](marc/marc_bringup) package.
