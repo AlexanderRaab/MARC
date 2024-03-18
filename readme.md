@@ -40,6 +40,10 @@ The current version of MARC is based on [ROS2 Humble]( https://docs.ros.org/en/h
 
 Due to the current focus on hardware prototypes and low-level locomotion control, the ROS2 setup is still under development.
 
+Simulation with Gazebo 11          |  Visualization in RVIZ2
+:-------------------------:|:-------------------------:
+<img src="04%20Documentation/img/gazebo_sim.png" alt="Simulation with Gazebo 11" width="400"/>  |  <img src="04%20Documentation/img/rviz2_viz.png" alt="Visualization with RVIZ2" width="400"/>
+
 ## Roadmap and planned features
 
 Current development
