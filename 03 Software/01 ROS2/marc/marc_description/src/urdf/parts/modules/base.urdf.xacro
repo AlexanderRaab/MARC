@@ -24,5 +24,6 @@
             <parent link="base_link" />
             <child link="base_footprint" />
         </joint>
+
     </xacro:macro>
 </robot>
