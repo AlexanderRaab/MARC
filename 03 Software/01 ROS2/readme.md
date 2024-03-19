@@ -7,7 +7,7 @@ For detailed descriptions of how to run the ROS2 project, check the [marc_bringu
 
 For launching the default simulation use
 
-    ros2 launch marc_bringup MARC.launch.py
+    ros2 launch marc_bringup MARC.launch.py simulation:=True
 
 after building an sourcing the workspace.
 
